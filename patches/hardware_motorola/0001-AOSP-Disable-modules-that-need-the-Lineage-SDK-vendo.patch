@@ -1,0 +1,75 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: awadak3davra <awadak3davra@users.noreply.github.com>
+Subject: [PATCH] AOSP: Disable modules that need the Lineage SDK,
+ vendor.lineage.touch or Lineage soong types
+
+Change-Id: I31b1a8bd8c0edcf3a020583280737a2a87b3f897
+---
+ Android.bp                                        | 15 ---------------
+ .../{Android.bp => Android.bp.disabled-aosp}      |  0
+ overlay/Android.bp                                |  7 -------
+ .../{Android.bp => Android.bp.disabled-aosp}      |  0
+ .../{Android.bp => Android.bp.disabled-aosp}      |  0
+ .../{Android.bp => Android.bp.disabled-aosp}      |  0
+ 6 files changed, 22 deletions(-)
+ rename aidl/touch/{Android.bp => Android.bp.disabled-aosp} (100%)
+ rename packages/MotoActions/{Android.bp => Android.bp.disabled-aosp} (100%)
+ rename packages/MotoExtTelephony/{Android.bp => Android.bp.disabled-aosp} (100%)
+ rename packages/StylusKeyHandler/{Android.bp => Android.bp.disabled-aosp} (100%)
+
+diff --git a/Android.bp b/Android.bp
+index 0c2a779..8394837 100644
+--- a/Android.bp
++++ b/Android.bp
+@@ -20,20 +20,5 @@ install_symlink {
+     symlink_target: "/vendor/fsg",
+ }
+ 
+-mkdir {
+-    name: "vendor_fsg_mountpoint",
+-    dir: "fsg",
+-    vendor: true,
+-}
+ 
+-mkdir {
+-    name: "vendor_super_fsg_mountpoint",
+-    dir: "super_fsg",
+-    vendor: true,
+-}
+ 
+-mkdir {
+-    name: "vendor_super_modem_mountpoint",
+-    dir: "super_modem",
+-    vendor: true,
+-}
+diff --git a/aidl/touch/Android.bp b/aidl/touch/Android.bp.disabled-aosp
+similarity index 100%
+rename from aidl/touch/Android.bp
+rename to aidl/touch/Android.bp.disabled-aosp
+diff --git a/overlay/Android.bp b/overlay/Android.bp
+index 81c890a..5bf730a 100644
+--- a/overlay/Android.bp
++++ b/overlay/Android.bp
+@@ -10,10 +10,3 @@ phony {
+     ]
+ }
+ 
+-phony {
+-    name: "MotoEuicc",
+-    required: [
+-        "EuiccPolicy",
+-        "EuiccPolicyMoto",
+-    ]
+-}
+diff --git a/packages/MotoActions/Android.bp b/packages/MotoActions/Android.bp.disabled-aosp
+similarity index 100%
+rename from packages/MotoActions/Android.bp
+rename to packages/MotoActions/Android.bp.disabled-aosp
+diff --git a/packages/MotoExtTelephony/Android.bp b/packages/MotoExtTelephony/Android.bp.disabled-aosp
+similarity index 100%
+rename from packages/MotoExtTelephony/Android.bp
+rename to packages/MotoExtTelephony/Android.bp.disabled-aosp
+diff --git a/packages/StylusKeyHandler/Android.bp b/packages/StylusKeyHandler/Android.bp.disabled-aosp
+similarity index 100%
+rename from packages/StylusKeyHandler/Android.bp
+rename to packages/StylusKeyHandler/Android.bp.disabled-aosp

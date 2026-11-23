@@ -1,0 +1,94 @@
+# Domain
+type vendor_moto_init_shell, domain;
+type vendor_moto_init_shell_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(vendor_moto_init_shell)
+
+allow vendor_moto_init_shell self:capability { chown fsetid fowner };
+allow vendor_moto_init_shell vendor_file:file execute_no_trans;
+allow vendor_moto_init_shell { vendor_toolbox_exec vendor_shell_exec vendor_motobox_exec }:file rx_file_perms;
+allow vendor_moto_init_shell block_device:dir search;
+
+# /mnt/vendor/persist/fps access
+allow vendor_moto_init_shell mnt_vendor_file:dir search;
+allow vendor_moto_init_shell vendor_persist_fingerprint_file:dir r_dir_perms;
+allow vendor_moto_init_shell vendor_persist_fingerprint_file:{ file lnk_file } rw_file_perms;
+
+# /proc/hw RW access
+allow vendor_moto_init_shell vendor_proc_hw:dir r_dir_perms;
+allow vendor_moto_init_shell vendor_proc_hw:{ file lnk_file } rw_file_perms;
+
+# /sys/class/touchscreen access
+allow vendor_moto_init_shell vendor_sysfs_touchpanel:dir r_dir_perms;
+allow vendor_moto_init_shell vendor_sysfs_touchpanel:{ file lnk_file } rw_file_perms;
+
+# Properties
+set_prop(vendor_moto_init_shell, ctl_start_prop)
+set_prop(vendor_moto_init_shell, vendor_mot_prop)
+set_prop(vendor_moto_init_shell, vendor_mtk_cxp_vendor_prop)
+set_prop(vendor_moto_init_shell, vendor_mtk_usb_prop)
+set_prop(vendor_moto_init_shell, vendor_sku_prop)
+
+# KMod
+allow vendor_moto_init_shell self:capability sys_module;
+allow vendor_moto_init_shell vendor_file:system module_load;
+
+# FP
+allow vendor_moto_init_shell fingerprint_device:chr_file { getattr setattr };
+allow vendor_moto_init_shell ctl_start_prop:property_service set;
+
+# /proc/meminfo
+allow vendor_moto_init_shell proc_meminfo:file r_file_perms;
+
+# /dev/esfp0
+allow vendor_moto_init_shell tee_device:chr_file { getattr setattr };
+
+# /mnt/vendor/persist
+allow vendor_moto_init_shell persist_data_file:dir search;
+allow vendor_moto_init_shell persist_data_file:file rw_file_perms;
+
+# /proc/meminfo
+allow vendor_moto_init_shell proc_meminfo:file r_file_perms;
+
+# kmesg
+allow vendor_moto_init_shell kmsg_device:chr_file rw_file_perms;
+
+# bootprof
+allow vendor_moto_init_shell proc_bootprof:file rw_file_perms;
+
+# ro.boot.product.hardware.sku
+set_prop(vendor_moto_init_shell, vendor_sku_prop)
+
+# init.mmi.block_perm.sh sets ownership and modes on Motorola partitions
+allow vendor_moto_init_shell {
+    vendor_cid_block_device
+    vendor_logs_block_device
+    vendor_utags_block_device
+}:blk_file { getattr setattr };
+
+# hardware_revisions.sh records panel, memory, storage and PMIC details
+allow vendor_moto_init_shell vendor_data_file:dir search;
+allow vendor_moto_init_shell vendor_hwrev_data_file:dir create_dir_perms;
+allow vendor_moto_init_shell vendor_hwrev_data_file:file create_file_perms;
+allow vendor_moto_init_shell proc_cmdline:file r_file_perms;
+r_dir_file(vendor_moto_init_shell, sysfs)
+r_dir_file(vendor_moto_init_shell, sysfs_devices_block)
+
+# Touch scripts adjust touch driver procfs nodes
+allow vendor_moto_init_shell proc:file { getattr setattr };
+
+# vendor.mmi.cxp.sh selects the modem carrier configuration
+set_prop(vendor_moto_init_shell, vendor_mtk_operator_prop)
+
+# init.oem.hw.sh copies ro.build.version.incremental into
+# ro.vendor.build.version.incremental, which only init may set; the build
+# already sets it, so the attempt is harmless.
+dontaudit vendor_moto_init_shell build_vendor_prop:property_service set;
+
+# init.mmi.backup.trustlet.sh
+set_prop(vendor_moto_init_shell, vendor_mot_tl_prop)
+# The script copies trustlets into /mnt/vendor/tzapp; stock runs it as
+# init_trustlet_backup with the same create rights.
+allow vendor_moto_init_shell mnt_vendor_trustlet_file:dir create_dir_perms;
+allow vendor_moto_init_shell mnt_vendor_trustlet_file:file create_file_perms;
+allow vendor_moto_init_shell mnt_vendor_trustlet_file:lnk_file r_file_perms;

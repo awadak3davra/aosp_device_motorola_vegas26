@@ -1,0 +1,31 @@
+//
+// SPDX-FileCopyrightText: 2022-2026 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+// Shims for stock vendor blobs, copied from hardware/lineage/compat.
+
+cc_library {
+    name: "libbase_shim",
+    shared_libs: ["libbase"],
+    srcs: [
+        "libbase/file.cpp",
+        "libbase/logging.cpp",
+        "libbase/strings.cpp",
+    ],
+    vendor: true,
+}
+
+cc_library_shared {
+    name: "libprocessgroup_shim",
+    srcs: ["libprocessgroup/processgroup.cpp"],
+    shared_libs: ["libprocessgroup"],
+    vendor: true,
+}
+
+// Stock mnld links the HIDL sensors 1.0 converters as a shared library; AOSP has them only as a static lib.
+cc_library_shared {
+    name: "android.hardware.sensors@1.0-convert-shared",
+    shared_libs: ["libhidlbase"],
+    whole_static_libs: ["android.hardware.sensors@1.0-convert"],
+    vendor_available: true,
+}

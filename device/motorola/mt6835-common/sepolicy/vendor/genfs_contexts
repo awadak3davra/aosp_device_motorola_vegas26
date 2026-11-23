@@ -1,0 +1,52 @@
+# Extcon
+genfscon sysfs /devices/platform/extcon_usb/extcon/extcon0/cable.0/name  u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/extcon_usb/extcon/extcon0/cable.1/name  u:object_r:sysfs_extcon:s0
+
+# Health
+genfscon sysfs /class/power_supply/battery/type u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /class/power_supply u:object_r:sysfs_power_supply:s0
+genfscon sysfs /devices/platform/smart_battery/power_supply/battery u:object_r:sysfs_batteryinfo:s0
+
+# Wakeup sources of the MT6375 charger, gauge and Type-C controller. Every
+# wakeup source must be readable by system_suspend.
+genfscon sysfs /devices/platform/soc/11b21000.i2c/i2c-5/5-0034/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/11b21000.i2c/i2c-5/5-0034/11b21000.i2c:mt6375@34:adc/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/11b21000.i2c/i2c-5/5-0034/11b21000.i2c:mt6375@34:auxadc/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/11b21000.i2c/i2c-5/5-0034/11b21000.i2c:mt6375@34:tcpc/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/11b21000.i2c/i2c-5/5-0034/11b21000.i2c:mt6375@34:chg/power_supply/primary_chg/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/11b21000.i2c/i2c-5/5-0034/11b21000.i2c:mt6375@34:mtk_gauge/power_supply/battery/wakeup u:object_r:sysfs_wakeup:s0
+
+# Input Devices
+genfscon sysfs /devices/virtual/input u:object_r:vendor_sysfs_input:s0
+
+# Motorola Specific filesystem entries
+genfscon proc /bootinfo u:object_r:vendor_proc_hw:s0
+genfscon proc /config u:object_r:vendor_proc_hw:s0
+genfscon proc /hw u:object_r:vendor_proc_hw:s0
+
+# Touchpanel
+genfscon sysfs /class/touchscreen u:object_r:vendor_sysfs_touchpanel:s0
+genfscon sysfs /devices/virtual/touchscreen u:object_r:vendor_sysfs_touchpanel:s0
+
+
+# Wakeup (https://lkml.org/lkml/2019/8/6/1275)
+genfscon sysfs /devices/platform/smart_battery/power_supply/battery/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/smart_battery/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/11013000.spi3/spi_master/spi3/spi3.0/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/11201000.usb0/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/11b20000.i2c/i2c-3/3-0028/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/11b21000.i2c/i2c-5/5-000b/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/11b21000.i2c/i2c-5/5-0022/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/1a000000.camisp_legacy/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/1c804000.spmi/spmi-0/0-03/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/1c804000.spmi/spmi-0/0-04/mt6377-rtc/rtc/rtc0/alarmtimer.0.auto/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/soc/1c804000.spmi/spmi-0/0-04/mt6377-rtc/wakeup u:object_r:sysfs_wakeup:s0
+
+# Charger
+genfscon sysfs /devices/platform/charger/power_supply/mtk-master-charger u:object_r:sysfs_power_supply:s0
+
+# LiveDisplay
+
+# cp-standalone charge pump sits at i2c 0-0065 on vegas26 (sepolicy_vndr only has 0-006a);
+# system_suspend reads its wakeup stats. Prefix match covers wakeupN.
+genfscon sysfs /devices/platform/soc/11ed0000.i2c/i2c-0/0-0065/power_supply/cp-standalone/wakeup u:object_r:sysfs_wakeup:s0

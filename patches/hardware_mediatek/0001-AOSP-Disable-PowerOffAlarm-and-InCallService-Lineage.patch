@@ -1,0 +1,21 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: awadak3davra <awadak3davra@users.noreply.github.com>
+Subject: [PATCH] AOSP: Disable PowerOffAlarm and InCallService (Lineage-only
+ deps)
+
+Change-Id: I3935d787d7308c64692cb4bc69770b7a4e66d6ef
+---
+ packages/InCallService/{Android.bp => Android.bp.disabled-aosp} | 0
+ packages/PowerOffAlarm/{Android.bp => Android.bp.disabled-aosp} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ rename packages/InCallService/{Android.bp => Android.bp.disabled-aosp} (100%)
+ rename packages/PowerOffAlarm/{Android.bp => Android.bp.disabled-aosp} (100%)
+
+diff --git a/packages/InCallService/Android.bp b/packages/InCallService/Android.bp.disabled-aosp
+similarity index 100%
+rename from packages/InCallService/Android.bp
+rename to packages/InCallService/Android.bp.disabled-aosp
+diff --git a/packages/PowerOffAlarm/Android.bp b/packages/PowerOffAlarm/Android.bp.disabled-aosp
+similarity index 100%
+rename from packages/PowerOffAlarm/Android.bp
+rename to packages/PowerOffAlarm/Android.bp.disabled-aosp

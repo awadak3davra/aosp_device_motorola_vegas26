@@ -1,0 +1,13 @@
+<!-- The MediaTek Codec2 service (android.hardware.media.c2@1.2-mediatek-64b)
+     registers its store as @1.1::IComponentStore/default. -->
+<manifest version="1.0" type="device">
+    <hal format="hidl">
+        <name>android.hardware.media.c2</name>
+        <transport>hwbinder</transport>
+        <version>1.1</version>
+        <interface>
+            <name>IComponentStore</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+</manifest>

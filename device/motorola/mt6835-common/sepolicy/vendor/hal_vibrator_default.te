@@ -1,0 +1,7 @@
+type vendor_sysfs_vibrator, sysfs_type, fs_type;
+
+allow hal_vibrator_default vendor_sysfs_vibrator:dir search;
+allow hal_vibrator_default vendor_sysfs_vibrator:file rw_file_perms;
+
+# The vibrator attributes are chowned and chmodded from the init scripts.
+allow init vendor_sysfs_vibrator:file setattr;

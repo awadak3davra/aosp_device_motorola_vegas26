@@ -1,0 +1,21 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: awadak3davra <awadak3davra@users.noreply.github.com>
+Subject: [PATCH] check_boot_jars: Allow MediaTek framework packages
+
+Change-Id: I347fd6fa4cb501c916ad1f4f048d5379bda7eff2
+---
+ scripts/check_boot_jars/package_allowed_list.txt | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/scripts/check_boot_jars/package_allowed_list.txt b/scripts/check_boot_jars/package_allowed_list.txt
+index d13678f..0a4f6ce 100644
+--- a/scripts/check_boot_jars/package_allowed_list.txt
++++ b/scripts/check_boot_jars/package_allowed_list.txt
+@@ -212,3 +212,7 @@ com\.google\.wear\..*
+ # Packages used for display offload in Wear OS
+ vendor\.google_clockwork\.displayoffload3
+ vendor\.google_clockwork\.displayoffload3\..*
++
++# MediaTek boot jars (device/mediatek/frameworks)
++com\.mediatek\..*
++mediatek\.telecom(\..*)?

@@ -1,0 +1,20 @@
+# To do powerhint on nodes defined in powerhint.json
+allow hal_power_default sysfs_devices_system_cpu:file rw_file_perms;
+allow hal_power_default cgroup:dir search;
+allow hal_power_default cgroup:file rw_file_perms;
+allow hal_power_default sysfs_gpu:file rw_file_perms;
+
+# To get/set powerhal state property
+set_prop(hal_power_default, vendor_power_prop)
+
+# Allow libperfmgr to control MTK CPU Memory Latency Management
+allow hal_power_default sysfs_cm_mgr:dir r_dir_perms;
+allow hal_power_default sysfs_cm_mgr:file rw_file_perms;
+
+# Sensors
+allow hal_power_default sysfs_sensor:dir r_dir_perms;
+allow hal_power_default sysfs_sensor:{ file lnk_file } rw_file_perms;
+
+# Double-tap-to-wake node under the touchscreen class
+allow hal_power_default vendor_sysfs_touchpanel:dir search;
+allow hal_power_default vendor_sysfs_touchpanel:file rw_file_perms;

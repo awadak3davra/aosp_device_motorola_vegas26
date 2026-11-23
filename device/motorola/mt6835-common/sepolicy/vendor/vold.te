@@ -1,0 +1,2 @@
+dontaudit vold { persist_data_file mnt_vendor_trustlet_file }:dir { open read ioctl };
+dontaudit vold mnt_product_file:dir search;

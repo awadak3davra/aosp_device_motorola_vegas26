@@ -1,0 +1,14 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: awadak3davra <awadak3davra@users.noreply.github.com>
+Subject: [PATCH] AOSP: Disable the vendor.lineage.touch HAL
+
+Change-Id: I501f544cacc8086103113c94b545d3cdcd803b20
+---
+ touch/{Android.bp => Android.bp.disabled-aosp} | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename touch/{Android.bp => Android.bp.disabled-aosp} (100%)
+
+diff --git a/touch/Android.bp b/touch/Android.bp.disabled-aosp
+similarity index 100%
+rename from touch/Android.bp
+rename to touch/Android.bp.disabled-aosp

@@ -1,0 +1,4 @@
+get_prop(system_server, vendor_mot_prop)
+
+# Unlabelled vendor.* lookups from shared code; platform does the same for appdomain/surfaceflinger/bootanim.
+dontaudit system_server vendor_default_prop:file read;

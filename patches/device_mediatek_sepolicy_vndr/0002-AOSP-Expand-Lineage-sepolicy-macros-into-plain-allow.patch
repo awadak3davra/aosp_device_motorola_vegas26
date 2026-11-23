@@ -1,0 +1,47 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: awadak3davra <awadak3davra@users.noreply.github.com>
+Subject: [PATCH] AOSP: Expand Lineage sepolicy macros into plain allow rules
+
+Change-Id: Ib607e6e3ddd40b9595cd9ef33c369aa6a89315ea
+---
+ base/vendor/hal_power_default.te          | 15 ++++++++++-----
+ base/vendor/hal_secure_element_default.te |  3 ++-
+ 2 files changed, 12 insertions(+), 6 deletions(-)
+
+diff --git a/base/vendor/hal_power_default.te b/base/vendor/hal_power_default.te
+index 61e855b..91d0d92 100644
+--- a/base/vendor/hal_power_default.te
++++ b/base/vendor/hal_power_default.te
+@@ -1,9 +1,14 @@
+ # To do powerhint on nodes defined in powerhint.json
+-rw_dir_file(hal_power_default, sysfs_cm_mgr)
+-rw_dir_file(hal_power_default, sysfs_ged)
+-rw_dir_file(hal_power_default, sysfs_gpu)
+-rw_dir_file(hal_power_default, proc_perfmgr)
+-rw_dir_file(hal_power_default, proc_ppm)
++allow hal_power_default sysfs_cm_mgr:dir r_dir_perms;
++allow hal_power_default sysfs_cm_mgr:{ file lnk_file } rw_file_perms;
++allow hal_power_default sysfs_ged:dir r_dir_perms;
++allow hal_power_default sysfs_ged:{ file lnk_file } rw_file_perms;
++allow hal_power_default sysfs_gpu:dir r_dir_perms;
++allow hal_power_default sysfs_gpu:{ file lnk_file } rw_file_perms;
++allow hal_power_default proc_perfmgr:dir r_dir_perms;
++allow hal_power_default proc_perfmgr:{ file lnk_file } rw_file_perms;
++allow hal_power_default proc_ppm:dir r_dir_perms;
++allow hal_power_default proc_ppm:{ file lnk_file } rw_file_perms;
+ 
+ r_dir_file(hal_power_default, sysfs_dvfsrc_devfreq)
+ r_dir_file(hal_power_default, proc_gpufreqv2)
+diff --git a/base/vendor/hal_secure_element_default.te b/base/vendor/hal_secure_element_default.te
+index d1eae60..c538e78 100644
+--- a/base/vendor/hal_secure_element_default.te
++++ b/base/vendor/hal_secure_element_default.te
+@@ -1,6 +1,7 @@
+ hal_client_domain(hal_secure_element_default, hal_nfc)
+ 
+-rw_dir_file(hal_secure_element_default, nfc_data_vendor_file)
++allow hal_secure_element_default nfc_data_vendor_file:dir r_dir_perms;
++allow hal_secure_element_default nfc_data_vendor_file:{ file lnk_file } rw_file_perms;
+ 
+ allow hal_secure_element_default nfc_device:chr_file rw_file_perms;
+ allow hal_secure_element_default st54spi_device:chr_file rw_file_perms;

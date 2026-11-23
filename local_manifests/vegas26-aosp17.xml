@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Local manifest for a plain AOSP android-17.0.0_r1 build of aosp_vegas26 (moto g power 2026).
+     Put it in .repo/local_manifests/. The device trees themselves come from this repository (scripts/apply.sh);
+     the proprietary vendor trees are extracted from your own stock firmware (see README.md). -->
+<manifest>
+  <remote name="github" fetch="https://github.com/" />
+
+  <!-- Prebuilt stock GKI kernel, DTB and DTBO (jimmielin). -->
+  <project path="device/motorola/vegas26-kernels" name="jimmielin/android_device_motorola_vegas26-kernels" remote="github" revision="1a00983ba41085556cc7f3e5ef92d5c5bfcb0318" upstream="lineage-23.2" dest-branch="lineage-23.2" />
+
+  <!-- MediaTek and Motorola HAL repos (LineageOS, Apache-2.0); patches/ applies on top of these revisions. -->
+  <project path="hardware/mediatek" name="LineageOS/android_hardware_mediatek" remote="github" revision="b14a6f03ac27b30e84dd6057a4d510b39db963c2" upstream="lineage-24.0" dest-branch="lineage-24.0" />
+  <project path="hardware/motorola" name="LineageOS/android_hardware_motorola" remote="github" revision="86aca664e34bbfef351b3bf6d8e9c7270fa51b7d" upstream="lineage-24.0" dest-branch="lineage-24.0" />
+  <project path="device/mediatek/sepolicy_vndr" name="LineageOS/android_device_mediatek_sepolicy_vndr" remote="github" revision="ca3eeb6c23340826e24c7444bbc2a606f0216b4e" upstream="lineage-24.0" dest-branch="lineage-24.0" />
+
+  <!-- Pixel libperfmgr, pixelstats and USB HALs: dropped from AOSP 17, taken from the PixelOS seventeen fork. -->
+  <project path="hardware/google/pixel" name="PixelOS-AOSP/android_hardware_google_pixel" remote="github" revision="697c4370a439248b35f8cbc17dde3974425b4fc2" upstream="seventeen" dest-branch="seventeen" />
+
+  <!-- Proprietary vendor trees (jimmielin, extracted from stock). Our A17 delta comes from
+       awadak3davra/proprietary_vendor_motorola_vegas26-extra via scripts/apply.sh. Remove these two if you
+       extract the blobs from your own stock dump instead. -->
+  <project path="vendor/motorola/vegas26" name="jimmielin/android_vendor_motorola_vegas26" remote="github" revision="38dedabfb7f991c1d2b4e98323fa1be8fd9c1158" upstream="lineage-23.2" dest-branch="lineage-23.2" />
+  <project path="vendor/motorola/mt6835-common-vegas26" name="jimmielin/android_vendor_motorola_mt6835-common-vegas26" remote="github" revision="28e63bc935d10f7709e64f92bf66dfe4d195ea0a" upstream="lineage-23.2" dest-branch="lineage-23.2" />
+
+  <!-- Blob extraction tooling used by device/motorola/vegas26/extract-files.py. -->
+  <project path="tools/extract-utils" name="LineageOS/android_tools_extract-utils" remote="github" revision="9d3f68fc8d245b7ae72a9bd63ba0ab59e31579f4" />
+  <project path="prebuilts/extract-tools" name="LineageOS/android_prebuilts_extract-tools" remote="github" revision="aaeb969a477321411279c03799f45ae9f94f770b" clone-depth="1" />
+</manifest>

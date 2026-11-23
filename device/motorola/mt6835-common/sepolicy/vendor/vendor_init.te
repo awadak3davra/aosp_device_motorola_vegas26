@@ -1,0 +1,19 @@
+allow vendor_init nfc_device:chr_file r_file_perms;
+allow vendor_init proc:file write;
+allow vendor_init sysfs_ged:dir r_dir_perms;
+allow vendor_init sysfs_ged:{ file lnk_file } rw_file_perms;
+allow vendor_init sysfs_power_supply:dir r_dir_perms;
+allow vendor_init sysfs_power_supply:{ file lnk_file } rw_file_perms;
+
+# Mot props
+set_prop(vendor_init, system_mot_prop)
+set_prop(vendor_init, vendor_mot_prop)
+
+# Sku prop
+set_prop(vendor_init, vendor_nfc_prop)
+set_prop(vendor_init, vendor_sku_prop)
+
+# MediaTek modem init scripts try to create /data/vendor_de/md, but only vold
+# may create directories directly under /data/vendor_de; the modem works
+# without it.
+dontaudit vendor_init vendor_userdir_file:dir { write add_name };

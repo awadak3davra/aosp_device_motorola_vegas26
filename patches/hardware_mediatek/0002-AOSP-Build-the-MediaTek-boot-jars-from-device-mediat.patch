@@ -1,0 +1,27 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: awadak3davra <awadak3davra@users.noreply.github.com>
+Subject: [PATCH] AOSP: Build the MediaTek boot jars from
+ device/mediatek/frameworks (root namespace)
+
+Change-Id: If594d6d3d7211db3c3d059a4762247cc9ad0707d
+---
+ frameworks/common/{Android.bp => Android.bp.disabled-aosp}        | 0
+ .../telecom-common/{Android.bp => Android.bp.disabled-aosp}       | 0
+ .../telephony-common/{Android.bp => Android.bp.disabled-aosp}     | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+ rename frameworks/common/{Android.bp => Android.bp.disabled-aosp} (100%)
+ rename frameworks/telecom-common/{Android.bp => Android.bp.disabled-aosp} (100%)
+ rename frameworks/telephony-common/{Android.bp => Android.bp.disabled-aosp} (100%)
+
+diff --git a/frameworks/common/Android.bp b/frameworks/common/Android.bp.disabled-aosp
+similarity index 100%
+rename from frameworks/common/Android.bp
+rename to frameworks/common/Android.bp.disabled-aosp
+diff --git a/frameworks/telecom-common/Android.bp b/frameworks/telecom-common/Android.bp.disabled-aosp
+similarity index 100%
+rename from frameworks/telecom-common/Android.bp
+rename to frameworks/telecom-common/Android.bp.disabled-aosp
+diff --git a/frameworks/telephony-common/Android.bp b/frameworks/telephony-common/Android.bp.disabled-aosp
+similarity index 100%
+rename from frameworks/telephony-common/Android.bp
+rename to frameworks/telephony-common/Android.bp.disabled-aosp
